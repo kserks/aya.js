@@ -10,6 +10,7 @@ module.exports = {
   output: {
   	path: __dirname+'/dist/js',
   	filename: '[name].js',
+    library: "aya"
   },
   devtool: 'source-map',
   module:{

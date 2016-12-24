@@ -1,3 +1,4 @@
+var aya =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -46,41 +47,69 @@
 
 	'use strict';
 	
-	var _dicts = __webpack_require__(1);
+	var _utils = __webpack_require__(1);
 	
-	var _dicts2 = _interopRequireDefault(_dicts);
+	function aya(str) {
+		var lowerStr = str.toLowerCase();
 	
-	var _utils = __webpack_require__(2);
+		return (0, _utils.invert)(lowerStr);
+	};
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function getChar(word) {
-		if ((0, _utils.isKyr)(word)) {
-			console.log(true, word);
-		} else {
-			console.log(false, word);
-		};
-		var reg = (0, _utils.isUpperCase)(word);
-		console.log('\u0420\u0435\u0433\u0438\u0441\u0442\u0440: ' + reg);
-		/*
-	 let result = [];
-	 var str = Object.values(word)
-	 		let arr = word.split('');
-	 
-	 		arr.map((key)=>{
-	 			result.push(dict[key])
-	 		});
-	 		
-	 		return result.join("");
-	 		*/
-	}
-	
-	var res = getChar('Г' /*'wuxia'*/);
-	
-	//console.log(res);
+	module.exports = aya;
 
 /***/ },
 /* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.invert = undefined;
+	
+	var _dict = __webpack_require__(2);
+	
+	var _dict2 = _interopRequireDefault(_dict);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function isRu(str) {
+		return (/[а-яё]/i.test(str)
+		);
+	};
+	
+	function getKeyByValue(dict, value) {
+		for (var prop in dict) {
+			if (dict.hasOwnProperty(prop)) {
+				if (dict[prop] === value) return prop;
+			}
+		}
+	}
+	
+	function invert(str) {
+	
+		var result = [];
+		var strArr = str.split("");
+	
+		if (isRu(str)) {
+	
+			strArr.forEach(function (key) {
+				result.push(_dict2.default[key]);
+			});
+		} else {
+	
+			strArr.map(function (item) {
+				result.push(getKeyByValue(_dict2.default, item));
+			});
+		}
+		return result.join('');
+	};
+	
+	exports.invert = invert;
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -88,35 +117,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	var EN_RU = {
-		'a': 'ф',
-		'b': 'и',
-		'c': 'с',
-		'd': 'в',
-		'e': 'у',
-		'f': 'а',
-		'g': 'п',
-		'h': 'р',
-		'i': 'ш',
-		'j': 'о',
-		'k': 'л',
-		'l': 'д',
-		'm': 'ь',
-		'n': 'т',
-		'o': 'o',
-		'p': 'з',
-		'q': 'й',
-		'r': 'к',
-		's': 'ы',
-		't': 'е',
-		'u': 'г',
-		'v': 'м',
-		'w': 'ц',
-		'x': 'ч',
-		'y': 'н',
-		'z': 'я'
-	};
-	var RU_EN = {
+	var dict = {
 		'а': 'f',
 		'б': ',',
 		'в': 'd',
@@ -149,36 +150,11 @@
 		'ь': 'm',
 		'э': "'",
 		'ю': '.',
-		'я': 'z'
+		'я': 'z',
+		'.': '/'
+	
 	};
-	exports.RU_EN = RU_EN;
-	exports.EN_RU = EN_RU;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	function isUpperCase(char) {
-	
-	  if (char.toUpperCase() === char) {
-	    return true;
-	  } else {
-	    return false;
-	  }
-	};
-	
-	function isKyr(str) {
-	  return (/[а-яё]/i.test(str)
-	  );
-	};
-	
-	exports.isKyr = isKyr;
-	exports.isUpperCase = isUpperCase;
+	exports.default = dict;
 
 /***/ }
 /******/ ]);
