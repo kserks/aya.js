@@ -1,3 +1,3 @@
 
 console.log(aya('google')); //пщщпду
-console.log(aya('пщщпду')); //google
+console.log(aya('кщпфгдшс сдш')); //google
